@@ -109,15 +109,20 @@ function TapGame() {
                     </div>
                   )}
                   <motion.div
-                    className="mx-auto flex h-32 w-32 items-center justify-center rounded-full text-7xl"
+                    className="mx-auto flex h-40 w-40 items-center justify-center overflow-hidden rounded-full"
                     style={{
                       background: `radial-gradient(circle, ${member.color}30, ${member.color}10)`,
                       boxShadow: `0 10px 40px -10px ${member.color}`,
                     }}
-                    animate={rare ? { scale: [1, 1.1, 1] } : {}}
+                    animate={rare ? { scale: [1, 1.06, 1] } : {}}
                     transition={{ duration: 1.5, repeat: rare ? Infinity : 0 }}
                   >
-                    {member.emoji}
+                    <img
+                      src={gifUrl}
+                      alt={member.name}
+                      className="h-full w-full object-cover"
+                      loading="eager"
+                    />
                   </motion.div>
                   <h2 className="mt-6 text-3xl font-black tracking-tight">{member.name}</h2>
                   <p className="mt-3 text-muted-foreground">{member.message}</p>
