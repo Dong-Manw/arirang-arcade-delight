@@ -100,7 +100,7 @@ function Menu() {
               whileHover={{ y: -8, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link to={g.to} className="group relative block">
+              <Link to={g.to} onClick={() => sounds.click()} className="group relative block">
                 <div
                   className="absolute -inset-px rounded-3xl opacity-60 blur-md transition group-hover:opacity-100"
                   style={{ background: `linear-gradient(135deg, ${g.accent}, oklch(0.85 0.1 20))` }}
