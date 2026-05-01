@@ -77,20 +77,91 @@ const make = (
   name: string,
   emoji: string,
   message: string,
+  extraLines: string[],
   color: string,
 ): Member => {
   const gifs = GIF_IDS[name].map(gif);
-  return { name, emoji, message, color, gifs, image: gifs[0] };
+  return { name, emoji, message, extraLines, color, gifs, image: gifs[0] };
 };
 
 export const MEMBERS: Member[] = [
-  make("RM", "🐨", "Leader vibes — keep dreaming big!", "oklch(0.6 0.18 250)"),
-  make("Jin", "🐹", "Worldwide handsome sends a kiss 💋", "oklch(0.75 0.15 30)"),
-  make("Suga", "🐱", "Min Yoongi says: stay genius.", "oklch(0.5 0.1 280)"),
-  make("J-Hope", "🐿️", "I'm your hope, you're my hope! ☀️", "oklch(0.78 0.18 70)"),
-  make("Jimin", "🐥", "Got jams? Jimin approves.", "oklch(0.72 0.18 20)"),
-  make("V", "🐯", "Taehyung says: I purple you 💜", "oklch(0.6 0.2 305)"),
-  make("Jungkook", "🐰", "Golden Maknae shoots his shot!", "oklch(0.65 0.2 22)"),
+  make(
+    "RM",
+    "🐨",
+    "Leader vibes — keep dreaming big!",
+    [
+      "Speaks fluent ARMY 💜",
+      "Reads books, breaks lamps.",
+      "Mon studio, midnight thoughts.",
+    ],
+    "oklch(0.6 0.18 250)",
+  ),
+  make(
+    "Jin",
+    "🐹",
+    "Worldwide handsome sends a kiss 💋",
+    [
+      "Pink Princess energy 🌸",
+      "Dad jokes incoming — brace yourself.",
+      "Eat Jin? Always hungry, always iconic.",
+    ],
+    "oklch(0.75 0.15 30)",
+  ),
+  make(
+    "Suga",
+    "🐱",
+    "Min Yoongi says: stay genius.",
+    [
+      "Agust D mode: activated.",
+      "Naps > everything. Fight me.",
+      "Producer brain, soft heart.",
+    ],
+    "oklch(0.5 0.1 280)",
+  ),
+  make(
+    "J-Hope",
+    "🐿️",
+    "I'm your hope, you're my hope! ☀️",
+    [
+      "Sunshine in human form.",
+      "Dance practice? More like dance perfection.",
+      "More than okay — Jack in the Box energy 📦",
+    ],
+    "oklch(0.78 0.18 70)",
+  ),
+  make(
+    "Jimin",
+    "🐥",
+    "Got jams? Jimin approves.",
+    [
+      "Mochi cheeks, steel work ethic.",
+      "Lie. Serendipity. Promise. Filter. 🎤",
+      "Jibooty mode unlocked.",
+    ],
+    "oklch(0.72 0.18 20)",
+  ),
+  make(
+    "V",
+    "🐯",
+    "Taehyung says: I purple you 💜",
+    [
+      "Boxy smile, baritone voice.",
+      "Vante painting your day pretty.",
+      "Tata + Yeontan = ultimate combo 🐶",
+    ],
+    "oklch(0.6 0.2 305)",
+  ),
+  make(
+    "Jungkook",
+    "🐰",
+    "Golden Maknae shoots his shot!",
+    [
+      "Bunny smile, lion vocals.",
+      "Can do everything. Literally everything.",
+      "Seven on repeat. You're welcome.",
+    ],
+    "oklch(0.65 0.2 22)",
+  ),
 ];
 
 /** Pick a random GIF for a member each time it's revealed. */
