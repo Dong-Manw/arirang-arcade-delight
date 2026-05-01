@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { MEMBERS, type Member } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
+import { sounds } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 
 export const Route = createFileRoute("/guess")({
   head: () => ({
