@@ -22,7 +22,8 @@ function pickRound(prevName?: string) {
   while (target.name === prevName) target = MEMBERS[Math.floor(Math.random() * MEMBERS.length)];
   const others = MEMBERS.filter((m) => m.name !== target.name).sort(() => Math.random() - 0.5).slice(0, 3);
   const options = [...others, target].sort(() => Math.random() - 0.5);
-  return { target, options };
+  const gifUrl = pickGif(target);
+  return { target, options, gifUrl };
 }
 
 function GuessGame() {
