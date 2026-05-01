@@ -53,9 +53,12 @@ function TapGame() {
       <AnimatedBackground />
 
       <div className="mx-auto max-w-2xl px-5 py-8">
-        <Link to="/menu" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-4 w-4" /> Back
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link to="/menu" onClick={() => sounds.click()} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </Link>
+          <SoundToggle />
+        </div>
 
         <div className="mt-10 text-center">
           <h1 className="font-display text-4xl font-black tracking-tight sm:text-5xl">
