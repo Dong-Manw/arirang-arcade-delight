@@ -37,9 +37,13 @@ function GuessGame() {
     if (time <= 0) {
       setRevealed(true);
       setScore((s) => ({ correct: s.correct, total: s.total + 1 }));
+      sounds.fail();
       return;
     }
-    const t = setTimeout(() => setTime((x) => x - 1), 1000);
+    const t = setTimeout(() => {
+      setTime((x) => x - 1);
+      if (time <= 4) sounds.tick();
+    }, 1000);
     return () => clearTimeout(t);
   }, [time, revealed]);
 
@@ -47,14 +51,18 @@ function GuessGame() {
     if (revealed) return;
     setPicked(m);
     setRevealed(true);
+    const isCorrect = m.name === round.target.name;
     setScore((s) => ({
-      correct: s.correct + (m.name === round.target.name ? 1 : 0),
+      correct: s.correct + (isCorrect ? 1 : 0),
       total: s.total + 1,
     }));
+    if (isCorrect) sounds.reward();
+    else sounds.fail();
     if (navigator.vibrate) navigator.vibrate(15);
   };
 
   const next = () => {
+    sounds.click();
     setRound(pickRound(round.target.name));
     setPicked(null);
     setRevealed(false);
@@ -69,13 +77,14 @@ function GuessGame() {
 
       <div className="mx-auto max-w-2xl px-5 py-8">
         <div className="flex items-center justify-between">
-          <Link to="/menu" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <Link to="/menu" onClick={() => sounds.click()} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Back
           </Link>
-          <div className="text-sm font-bold">
-            <span className="rounded-full bg-card px-4 py-2 shadow-soft">
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-card px-4 py-2 text-sm font-bold shadow-soft">
               ✓ {score.correct}/{score.total}
             </span>
+            <SoundToggle />
           </div>
         </div>
 
