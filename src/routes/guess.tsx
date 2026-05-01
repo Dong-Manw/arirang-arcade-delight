@@ -108,14 +108,19 @@ function GuessGame() {
               className="absolute inset-0 transition-all duration-700"
               style={{
                 background: `radial-gradient(circle at 50% 35%, ${round.target.color}, oklch(0.95 0.05 20))`,
-                filter: revealed ? "blur(0px)" : "blur(28px)",
-                transform: revealed ? "scale(1)" : "scale(1.1)",
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-9xl drop-shadow-2xl" style={{ filter: revealed ? "blur(0)" : "blur(14px)" }}>
-                {round.target.emoji}
-              </span>
+            <img
+              src={round.gifUrl}
+              alt={revealed ? round.target.name : "Mystery member"}
+              className="absolute inset-0 h-full w-full object-cover transition-all duration-700"
+              style={{
+                filter: revealed ? "blur(0px)" : "blur(28px)",
+                transform: revealed ? "scale(1)" : "scale(1.15)",
+              }}
+            />
+            <div className="pointer-events-none absolute right-3 bottom-3 text-4xl drop-shadow-lg">
+              {revealed ? round.target.emoji : ""}
             </div>
             {!revealed && (
               <div className="absolute right-4 top-4 rounded-full bg-card/90 px-3 py-1 text-sm font-bold backdrop-blur">
