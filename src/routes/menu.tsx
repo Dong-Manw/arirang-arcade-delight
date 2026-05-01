@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
+import { SoundToggle } from "@/components/SoundToggle";
+import { sounds } from "@/lib/sound";
 import { useState } from "react";
 import { Share2, Check } from "lucide-react";
 
