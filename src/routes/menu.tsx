@@ -45,6 +45,7 @@ function Menu() {
 
   const share = async () => {
     try {
+      sounds.click();
       await navigator.clipboard.writeText(window.location.origin);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
