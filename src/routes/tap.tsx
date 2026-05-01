@@ -126,6 +126,20 @@ function TapGame() {
                   </motion.div>
                   <h2 className="mt-6 text-3xl font-black tracking-tight">{member.name}</h2>
                   <p className="mt-3 text-muted-foreground">{member.message}</p>
+                  <ul className="mt-4 space-y-1.5 text-sm text-foreground/80">
+                    {member.extraLines.map((line, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 + i * 0.1 }}
+                        className="flex items-start justify-center gap-2"
+                      >
+                        <span className="text-rose-500">•</span>
+                        <span>{line}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
 
                 <button
