@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { MEMBERS, type Member } from "@/lib/members";
+import { MEMBERS, type Member, pickGif } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
 import { sounds } from "@/lib/sound";
 import { SoundToggle } from "@/components/SoundToggle";
@@ -22,7 +22,8 @@ function pickRound(prevName?: string) {
   while (target.name === prevName) target = MEMBERS[Math.floor(Math.random() * MEMBERS.length)];
   const others = MEMBERS.filter((m) => m.name !== target.name).sort(() => Math.random() - 0.5).slice(0, 3);
   const options = [...others, target].sort(() => Math.random() - 0.5);
-  return { target, options };
+  const gifUrl = pickGif(target);
+  return { target, options, gifUrl };
 }
 
 function GuessGame() {
@@ -107,14 +108,19 @@ function GuessGame() {
               className="absolute inset-0 transition-all duration-700"
               style={{
                 background: `radial-gradient(circle at 50% 35%, ${round.target.color}, oklch(0.95 0.05 20))`,
-                filter: revealed ? "blur(0px)" : "blur(28px)",
-                transform: revealed ? "scale(1)" : "scale(1.1)",
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-9xl drop-shadow-2xl" style={{ filter: revealed ? "blur(0)" : "blur(14px)" }}>
-                {round.target.emoji}
-              </span>
+            <img
+              src={round.gifUrl}
+              alt={revealed ? round.target.name : "Mystery member"}
+              className="absolute inset-0 h-full w-full object-cover transition-all duration-700"
+              style={{
+                filter: revealed ? "blur(0px)" : "blur(28px)",
+                transform: revealed ? "scale(1)" : "scale(1.15)",
+              }}
+            />
+            <div className="pointer-events-none absolute right-3 bottom-3 text-4xl drop-shadow-lg">
+              {revealed ? round.target.emoji : ""}
             </div>
             {!revealed && (
               <div className="absolute right-4 top-4 rounded-full bg-card/90 px-3 py-1 text-sm font-bold backdrop-blur">
