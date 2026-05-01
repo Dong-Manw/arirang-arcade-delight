@@ -1,4 +1,5 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
+import { MusicPlayer } from "@/components/MusicPlayer";
 
 import appCss from "../styles.css?url";
 
@@ -65,5 +66,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  const { pathname } = useLocation();
+  const showPlayer = pathname !== "/";
+  return (
+    <>
+      <Outlet />
+      {showPlayer && <MusicPlayer />}
+    </>
+  );
 }
