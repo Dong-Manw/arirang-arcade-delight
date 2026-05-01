@@ -5,6 +5,8 @@ import confetti from "canvas-confetti";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { MEMBERS, type Member } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
+import { sounds } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 
 export const Route = createFileRoute("/tap")({
   head: () => ({
@@ -33,7 +35,17 @@ function TapGame() {
     setKey((k) => k + 1);
 
     if (isRare) {
+      sounds.rare();
       confetti({
+        particleCount: 120,
+        spread: 90,
+        origin: { y: 0.5 },
+        colors: ["#ff4d4d", "#ff6b6b", "#ffe5e5", "#c084fc"],
+      });
+    } else {
+      sounds.reveal();
+    }
+  };
         particleCount: 120,
         spread: 90,
         origin: { y: 0.5 },
