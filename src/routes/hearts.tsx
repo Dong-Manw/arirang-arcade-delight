@@ -29,6 +29,7 @@ function HeartsGame() {
   const milestonesHit = useRef(new Set<number>());
 
   const start = () => {
+    sounds.start();
     setScore(0);
     setTime(30);
     setHearts([]);
@@ -43,8 +44,10 @@ function HeartsGame() {
       setTime((s) => {
         if (s <= 1) {
           setPhase("over");
+          sounds.fail();
           return 0;
         }
+        if (s <= 5) sounds.tick();
         return s - 1;
       });
     }, 1000);
@@ -87,6 +90,7 @@ function HeartsGame() {
         const member = MEMBERS[(i * 2 + 1) % MEMBERS.length];
         setPopMember({ name: member.name, emoji: member.emoji });
         setScore((s) => s + 5); // bonus
+        sounds.reward();
         setTimeout(() => setPopMember(null), 1800);
       }
     });
@@ -95,6 +99,7 @@ function HeartsGame() {
   const catchHeart = (id: number) => {
     setHearts((h) => h.filter((x) => x.id !== id));
     setScore((s) => s + 1);
+    sounds.catch();
     if (navigator.vibrate) navigator.vibrate(10);
   };
 
