@@ -64,12 +64,15 @@ function Menu() {
           className="flex items-center justify-between"
         >
           <Link to="/" className="font-korean text-2xl text-gradient-rose">아리랑</Link>
-          <button
-            onClick={share}
-            className="flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium backdrop-blur transition hover:shadow-soft"
-          >
-            {copied ? <><Check className="h-4 w-4 text-primary" /> Copied!</> : <><Share2 className="h-4 w-4" /> Share</>}
-          </button>
+          <div className="flex items-center gap-2">
+            <SoundToggle />
+            <button
+              onClick={share}
+              className="flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium backdrop-blur transition hover:shadow-soft"
+            >
+              {copied ? <><Check className="h-4 w-4 text-primary" /> Copied!</> : <><Share2 className="h-4 w-4" /> Share</>}
+            </button>
+          </div>
         </motion.div>
 
         <motion.div
