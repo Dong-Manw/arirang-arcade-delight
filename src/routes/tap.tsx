@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { MEMBERS, type Member } from "@/lib/members";
+import { MEMBERS, type Member, pickGif } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
 import { sounds } from "@/lib/sound";
 import { SoundToggle } from "@/components/SoundToggle";
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/tap")({
 
 function TapGame() {
   const [member, setMember] = useState<Member | null>(null);
+  const [gifUrl, setGifUrl] = useState<string>("");
   const [rare, setRare] = useState(false);
   const [key, setKey] = useState(0);
   const [lastIdx, setLastIdx] = useState(-1);
@@ -31,7 +32,9 @@ function TapGame() {
     setLastIdx(idx);
     const isRare = Math.random() < 0.1;
     setRare(isRare);
-    setMember(MEMBERS[idx]);
+    const m = MEMBERS[idx];
+    setMember(m);
+    setGifUrl(pickGif(m));
     setKey((k) => k + 1);
 
     if (isRare) {
