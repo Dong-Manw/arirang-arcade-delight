@@ -189,6 +189,20 @@ function GuessGame() {
                 {picked == null ? "⏰ Out of time!" : correct ? "✅ Correct!" : "❌ Not quite"}
               </div>
               <p className="mt-1 text-sm text-muted-foreground">{round.target.message}</p>
+              <ul className="mx-auto mt-3 max-w-sm space-y-1.5 text-sm text-foreground/80">
+                {round.target.extraLines.map((line, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.08 }}
+                    className="flex items-start justify-center gap-2"
+                  >
+                    <span className="text-rose-500">•</span>
+                    <span>{line}</span>
+                  </motion.li>
+                ))}
+              </ul>
               <button
                 onClick={next}
                 className="mt-4 rounded-full bg-gradient-rose px-8 py-3 font-bold text-white shadow-soft hover:scale-105 active:scale-95"
