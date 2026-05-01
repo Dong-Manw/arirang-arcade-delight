@@ -5,6 +5,8 @@ import confetti from "canvas-confetti";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { MEMBERS, type Member } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
+import { sounds } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 
 export const Route = createFileRoute("/tap")({
   head: () => ({
@@ -33,23 +35,30 @@ function TapGame() {
     setKey((k) => k + 1);
 
     if (isRare) {
+      sounds.rare();
       confetti({
         particleCount: 120,
         spread: 90,
         origin: { y: 0.5 },
         colors: ["#ff4d4d", "#ff6b6b", "#ffe5e5", "#c084fc"],
       });
+    } else {
+      sounds.reveal();
     }
   };
+
 
   return (
     <div className="relative min-h-screen">
       <AnimatedBackground />
 
       <div className="mx-auto max-w-2xl px-5 py-8">
-        <Link to="/menu" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-4 w-4" /> Back
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link to="/menu" onClick={() => sounds.click()} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </Link>
+          <SoundToggle />
+        </div>
 
         <div className="mt-10 text-center">
           <h1 className="font-display text-4xl font-black tracking-tight sm:text-5xl">

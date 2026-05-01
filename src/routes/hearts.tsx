@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { MEMBERS } from "@/lib/members";
 import { ArrowLeft, Heart } from "lucide-react";
+import { sounds } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 
 export const Route = createFileRoute("/hearts")({
   head: () => ({
@@ -27,6 +29,7 @@ function HeartsGame() {
   const milestonesHit = useRef(new Set<number>());
 
   const start = () => {
+    sounds.start();
     setScore(0);
     setTime(30);
     setHearts([]);
@@ -41,8 +44,10 @@ function HeartsGame() {
       setTime((s) => {
         if (s <= 1) {
           setPhase("over");
+          sounds.fail();
           return 0;
         }
+        if (s <= 5) sounds.tick();
         return s - 1;
       });
     }, 1000);
@@ -85,6 +90,7 @@ function HeartsGame() {
         const member = MEMBERS[(i * 2 + 1) % MEMBERS.length];
         setPopMember({ name: member.name, emoji: member.emoji });
         setScore((s) => s + 5); // bonus
+        sounds.reward();
         setTimeout(() => setPopMember(null), 1800);
       }
     });
@@ -93,6 +99,7 @@ function HeartsGame() {
   const catchHeart = (id: number) => {
     setHearts((h) => h.filter((x) => x.id !== id));
     setScore((s) => s + 1);
+    sounds.catch();
     if (navigator.vibrate) navigator.vibrate(10);
   };
 
@@ -102,15 +109,18 @@ function HeartsGame() {
 
       <div className="relative z-10 mx-auto max-w-3xl px-5 py-6">
         <div className="flex items-center justify-between">
-          <Link to="/menu" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <Link to="/menu" onClick={() => sounds.click()} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Back
           </Link>
-          {phase === "playing" && (
-            <div className="flex items-center gap-3 text-sm font-bold">
-              <span className="rounded-full bg-card px-4 py-2 shadow-soft">⏱ {time}s</span>
-              <span className="rounded-full bg-gradient-rose px-4 py-2 text-white shadow-soft">❤️ {score}</span>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {phase === "playing" && (
+              <>
+                <span className="rounded-full bg-card px-3 py-1.5 text-sm font-bold shadow-soft">⏱ {time}s</span>
+                <span className="rounded-full bg-gradient-rose px-3 py-1.5 text-sm font-bold text-white shadow-soft">❤️ {score}</span>
+              </>
+            )}
+            <SoundToggle />
+          </div>
         </div>
 
         {phase === "idle" && (
