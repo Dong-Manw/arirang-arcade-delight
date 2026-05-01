@@ -2,6 +2,8 @@ export type Member = {
   name: string;
   emoji: string;
   message: string;
+  /** Extra fan-style lines shown under the GIF. */
+  extraLines: string[];
   color: string;
   /** Primary GIF (kept for backwards compatibility — equals gifs[0]). */
   image: string;
