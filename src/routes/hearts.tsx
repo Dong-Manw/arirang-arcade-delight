@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { MEMBERS } from "@/lib/members";
 import { ArrowLeft, Heart } from "lucide-react";
+import { sounds } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 
 export const Route = createFileRoute("/hearts")({
   head: () => ({
