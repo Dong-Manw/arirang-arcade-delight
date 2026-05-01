@@ -109,15 +109,18 @@ function HeartsGame() {
 
       <div className="relative z-10 mx-auto max-w-3xl px-5 py-6">
         <div className="flex items-center justify-between">
-          <Link to="/menu" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <Link to="/menu" onClick={() => sounds.click()} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Back
           </Link>
-          {phase === "playing" && (
-            <div className="flex items-center gap-3 text-sm font-bold">
-              <span className="rounded-full bg-card px-4 py-2 shadow-soft">⏱ {time}s</span>
-              <span className="rounded-full bg-gradient-rose px-4 py-2 text-white shadow-soft">❤️ {score}</span>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {phase === "playing" && (
+              <>
+                <span className="rounded-full bg-card px-3 py-1.5 text-sm font-bold shadow-soft">⏱ {time}s</span>
+                <span className="rounded-full bg-gradient-rose px-3 py-1.5 text-sm font-bold text-white shadow-soft">❤️ {score}</span>
+              </>
+            )}
+            <SoundToggle />
+          </div>
         </div>
 
         {phase === "idle" && (
