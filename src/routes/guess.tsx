@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { MEMBERS, type Member } from "@/lib/members";
+import { MEMBERS, type Member, pickGif } from "@/lib/members";
 import { ArrowLeft } from "lucide-react";
 import { sounds } from "@/lib/sound";
 import { SoundToggle } from "@/components/SoundToggle";
