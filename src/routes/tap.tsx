@@ -46,13 +46,7 @@ function TapGame() {
       sounds.reveal();
     }
   };
-        particleCount: 120,
-        spread: 90,
-        origin: { y: 0.5 },
-        colors: ["#ff4d4d", "#ff6b6b", "#ffe5e5", "#c084fc"],
-      });
-    }
-  };
+
 
   return (
     <div className="relative min-h-screen">
