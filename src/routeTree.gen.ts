@@ -9,8 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TapRouteImport } from './routes/tap'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as HeartsRouteImport } from './routes/hearts'
+import { Route as GuessRouteImport } from './routes/guess'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TapRoute = TapRouteImport.update({
+  id: '/tap',
+  path: '/tap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeartsRoute = HeartsRouteImport.update({
+  id: '/hearts',
+  path: '/hearts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuessRoute = GuessRouteImport.update({
+  id: '/guess',
+  path: '/guess',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +43,72 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/guess': typeof GuessRoute
+  '/hearts': typeof HeartsRoute
+  '/menu': typeof MenuRoute
+  '/tap': typeof TapRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guess': typeof GuessRoute
+  '/hearts': typeof HeartsRoute
+  '/menu': typeof MenuRoute
+  '/tap': typeof TapRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/guess': typeof GuessRoute
+  '/hearts': typeof HeartsRoute
+  '/menu': typeof MenuRoute
+  '/tap': typeof TapRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/guess' | '/hearts' | '/menu' | '/tap'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/guess' | '/hearts' | '/menu' | '/tap'
+  id: '__root__' | '/' | '/guess' | '/hearts' | '/menu' | '/tap'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GuessRoute: typeof GuessRoute
+  HeartsRoute: typeof HeartsRoute
+  MenuRoute: typeof MenuRoute
+  TapRoute: typeof TapRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tap': {
+      id: '/tap'
+      path: '/tap'
+      fullPath: '/tap'
+      preLoaderRoute: typeof TapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hearts': {
+      id: '/hearts'
+      path: '/hearts'
+      fullPath: '/hearts'
+      preLoaderRoute: typeof HeartsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guess': {
+      id: '/guess'
+      path: '/guess'
+      fullPath: '/guess'
+      preLoaderRoute: typeof GuessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,16 +121,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GuessRoute: GuessRoute,
+  HeartsRoute: HeartsRoute,
+  MenuRoute: MenuRoute,
+  TapRoute: TapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
