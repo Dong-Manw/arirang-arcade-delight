@@ -33,11 +33,15 @@ export const Route = createRootRoute({
       { title: "ARIRANG BTS ARCADE 💜" },
       { name: "description", content: "Premium Korean-inspired BTS mini-arcade. Three games, no login, all love." },
       { name: "author", content: "ARIRANG" },
-      { property: "og:title", content: "ARIRANG BTS ARCADE" },
-      { property: "og:description", content: "Tap to Reveal · Catch the Hearts · Guess the Member" },
+      { property: "og:title", content: "ARIRANG BTS ARCADE 💜" },
+      { property: "og:description", content: "Premium Korean-inspired BTS mini-arcade. Three games, no login, all love." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ARIRANG BTS ARCADE 💜" },
+      { name: "twitter:description", content: "Premium Korean-inspired BTS mini-arcade. Three games, no login, all love." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a9950b16-2e28-4fce-b166-451ea3203438/id-preview-a5c4bde1--98e57d99-1fa5-4d48-8add-2fc810f7e503.lovable.app-1777728043221.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a9950b16-2e28-4fce-b166-451ea3203438/id-preview-a5c4bde1--98e57d99-1fa5-4d48-8add-2fc810f7e503.lovable.app-1777728043221.png" },
     ],
     links: [
       {
